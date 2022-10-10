@@ -9,9 +9,9 @@ const Masthead: React.FC = () => {
 
 	let progress = 0;
 
-	const { current: elContainer } = refContainer;
-	if (elContainer) {
-		progress = Math.min(1, scrollY / elContainer.clientHeight);
+	const { current: pageCalc } = refContainer;
+	if (pageCalc) {
+		progress = Math.min(1, scrollY / pageCalc.clientHeight);
 	}
 
 	return (
@@ -19,7 +19,7 @@ const Masthead: React.FC = () => {
 			ref={refContainer}
 			className='min-h-screen flex flex-col items-center justify-center'
 			style={{
-				transform: `translateY(-${progress * 20}vh)`,
+				transform: `translateY(-${progress * 30}vh)`,
 			}}
 		>
 			<video
@@ -45,9 +45,9 @@ const Masthead: React.FC = () => {
 				<h2 className='mb-2 text-2xl xl:text-3xl tracking-tight '>
 					<span>App development,</span> <span>done right</span>
 				</h2>
-				<div>
-					<BsArrowBarDown width={138 / 3} height={105 / 3} />
-				</div>
+			</div>
+			<div className='z-10 text-white'>
+				<BsArrowBarDown size={40} className='animate-bounce' />
 			</div>
 		</div>
 	);
