@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import About from './components/About';
 import Masthead from './components/masthead';
 
 const Home: NextPage = () => {
@@ -12,6 +13,7 @@ const Home: NextPage = () => {
 			</Head>
 
 			<Masthead />
+			<About />
 		</div>
 	);
 };
