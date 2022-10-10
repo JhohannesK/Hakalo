@@ -6,9 +6,9 @@ const About: React.FC = () => {
 		<section className='flex flex-col bg-white pt-0 pb-20 text-3xl md:text-4xl'>
 			<div className='container mx-auto px-11'>
 				<p className='leading-tight max-w-5xl mx-auto text-4xl lg:text-4xl'>
-					<strong>We will help you ship better apps, faster.</strong> Our
-					team of expert engineers has created the best user experience in
-					some of the most popular apps worldwide.
+					<strong>We will help you get a better estate, faster.</strong>{' '}
+					Our team of expert engineers are well educated with experience to
+					grab you the estate of your choice at an affordable fee.
 				</p>
 			</div>
 			<div className='container mx-auto px-11 text-center mt-28'>

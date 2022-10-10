@@ -4,6 +4,7 @@ import { BsArrowBarDown } from 'react-icons/bs';
 import { ScrollContext } from '../../utils/scroll-observer';
 
 const Masthead: React.FC = () => {
+	const [loadImage, setLoadImage] = useState(false);
 	const refContainer = useRef<HTMLDivElement>(null);
 	const { scrollY } = useContext(ScrollContext);
 
@@ -13,6 +14,10 @@ const Masthead: React.FC = () => {
 	if (pageCalc) {
 		progress = Math.min(1, scrollY / pageCalc.clientHeight);
 	}
+
+	const animateArrowIcon = useCallback(() => {
+		setLoadImage(true);
+	}, []);
 
 	return (
 		<div
@@ -31,23 +36,33 @@ const Masthead: React.FC = () => {
 			>
 				<source src='/vid.mp4' type='video/mp4' />
 			</video>
-			<div className='flex-grow-0 pt-10 transition-opacity duration-1000'>
+			<div
+				className={`flex-grow-0 pt-10 transition-opacity duration-1000 ${
+					loadImage ? 'opacity-100' : 'opacity-0'
+				}`}
+			>
 				<Image
 					src='/logo.svg'
 					className='bg-transparent'
 					height={214 / 3}
 					width={228 / 3}
 					alt='logo'
+					onLoad={() => animateArrowIcon()}
 				/>
 			</div>
-			<div className='p-12 font-bold z-10 text-white   drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)] text-center flex-1 flex items-center justify-center flex-col '>
+			<div className='p-12 font-bold z-10 text-white drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)] text-center flex-1 flex items-center justify-center flex-col '>
 				<h1 className='mb-6 text-4xl xl:text-5xl'>Hakalo</h1>
 				<h2 className='mb-2 text-2xl xl:text-3xl tracking-tight '>
-					<span>App development,</span> <span>done right</span>
+					<span>Real Estate </span>
+					<span>| Best in the world</span>
 				</h2>
 			</div>
-			<div className='z-10 text-white'>
-				<BsArrowBarDown size={40} className='animate-bounce' />
+			<div
+				className={`z-10 text-white transition-all duration-1000 ${
+					loadImage ? 'opacity-100' : 'opacity-0 -translate-y-10'
+				}`}
+			>
+				<BsArrowBarDown size={40} className={`animate-bounce `} />
 			</div>
 		</div>
 	);
