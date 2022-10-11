@@ -24,7 +24,7 @@ const Masthead: React.FC = () => {
 			ref={refContainer}
 			className='min-h-screen flex flex-col items-center justify-center'
 			style={{
-				transform: `translateY(-${progress * 30}vh)`,
+				transform: `translateY(-${progress * 20}vh)`,
 			}}
 		>
 			<video
@@ -50,9 +50,9 @@ const Masthead: React.FC = () => {
 					onLoad={() => animateArrowIcon()}
 				/>
 			</div>
-			<div className='p-12 font-bold z-10 text-white drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)] text-center flex-1 flex items-center justify-center flex-col '>
-				<h1 className='mb-6 text-4xl xl:text-5xl'>Hakalo</h1>
-				<h2 className='mb-2 text-2xl xl:text-3xl tracking-tight '>
+			<div className='p-12 font-bold z-10 text-lime-400 drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)] text-center flex-1 flex items-center justify-center flex-col '>
+				<h1 className='mb-6 text-4xl xl:text-5xl text-purple'>Hakalo</h1>
+				<h2 className='mb-2 text-2xl xl:text-3xl tracking-tight text-orange '>
 					<span>Real Estate </span>
 					<span>| Best in the world</span>
 				</h2>
@@ -62,7 +62,10 @@ const Masthead: React.FC = () => {
 					loadImage ? 'opacity-100' : 'opacity-0 -translate-y-10'
 				}`}
 			>
-				<BsArrowBarDown size={40} className={`animate-bounce `} />
+				<BsArrowBarDown
+					size={40}
+					className={`animate-bounce text-orange`}
+				/>
 			</div>
 		</div>
 	);
