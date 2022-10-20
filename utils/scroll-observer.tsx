@@ -1,4 +1,4 @@
-import React, { Children, useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 interface ScrollValue {
 	scrollY: number;
