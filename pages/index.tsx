@@ -15,7 +15,7 @@ const Home: NextPage = () => {
 			</Head>
 
 			<Masthead />
-			<About />
+			{/* <About /> */}
 			<Skills />
 			<Footer />
 		</div>

@@ -15,11 +15,12 @@ const Member: React.FC<Props> = ({ id, name, socialId, link }) => {
 			<Image src='/ImageOne.svg' alt={name} width={1366} height={1555} />
 			<div className='text-2xl xl:text-3xl'>{name}</div>
 			<div className='text-xl'>
-				<Link href={link}>
+				{/* <Link href={link}>
 					<a href='' target='_blank'>
 						{socialId}
 					</a>
-				</Link>
+				</Link> */}
+				<p>{socialId}</p>
 			</div>
 		</div>
 	);
