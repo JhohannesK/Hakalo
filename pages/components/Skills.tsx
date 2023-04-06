@@ -10,6 +10,7 @@ const opacityForBlock = (sectionProgress: number, blockNo: number) => {
 
 const Skills: React.FC = () => {
 	const { scrollY } = useContext(ScrollContext);
+	console.log('🚀 ~ file: Skills.tsx:13 ~ scrollY:', scrollY);
 	const refContainer = useRef<HTMLDivElement>(null);
 
 	const numOfPages = 3;

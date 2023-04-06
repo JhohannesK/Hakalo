@@ -4,6 +4,7 @@ import About from './components/About';
 import Masthead from './components/masthead';
 import Skills from './components/Skills';
 import Footer from './components/Footer';
+import Tile from './components/Tile';
 
 const Home: NextPage = () => {
 	return (
@@ -17,6 +18,7 @@ const Home: NextPage = () => {
 			<Masthead />
 			<About />
 			<Skills />
+			<Tile numOfPages={3} />
 			<Footer />
 		</div>
 	);
