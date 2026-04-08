@@ -1,23 +1,27 @@
-import React, { useRef, useContext, useState, useCallback } from 'react';
+import React, { useRef, useContext, useState, useEffect } from 'react';
 import Image from 'next/image';
 import { BsArrowBarDown } from 'react-icons/bs';
 import { ScrollContext } from '../../utils/scroll-observer';
 
 const Masthead: React.FC = () => {
 	const [loadImage, setLoadImage] = useState(false);
+	const [clientHeight, setClientHeight] = useState(0);
 	const refContainer = useRef<HTMLDivElement>(null);
 	const { scrollY } = useContext(ScrollContext);
 
-	let progress = 0;
+	useEffect(() => {
+		const el = refContainer.current;
+		if (!el) return;
 
-	const { current: pageCalc } = refContainer;
-	if (pageCalc) {
-		progress = Math.min(1, scrollY / pageCalc.clientHeight);
-	}
+		const updateHeight = () => setClientHeight(el.clientHeight);
+		updateHeight();
 
-	const animateArrowIcon = useCallback(() => {
-		setLoadImage(true);
+		const observer = new ResizeObserver(updateHeight);
+		observer.observe(el);
+		return () => observer.disconnect();
 	}, []);
+
+	const progress = clientHeight > 0 ? Math.min(1, scrollY / clientHeight) : 0;
 
 	return (
 		<div
@@ -47,7 +51,7 @@ const Masthead: React.FC = () => {
 					height={214 / 3}
 					width={228 / 3}
 					alt='logo'
-					onLoad={() => animateArrowIcon()}
+					onLoad={() => setLoadImage(true)}
 				/>
 			</div>
 			<div className='p-12 font-bold z-10 text-lime-400 drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)] text-center flex-1 flex items-center justify-center flex-col '>

@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import style from '../../styles/skills.module.css';
 import { ScrollContext } from '../../utils/scroll-observer';
 
@@ -8,24 +8,40 @@ const opacityForBlock = (sectionProgress: number, blockNo: number) => {
 	return 0.2;
 };
 
+interface Dimensions {
+	clientHeight: number;
+	offsetTop: number;
+}
+
 const Skills: React.FC = () => {
 	const { scrollY } = useContext(ScrollContext);
-	console.log('🚀 ~ file: Skills.tsx:13 ~ scrollY:', scrollY);
 	const refContainer = useRef<HTMLDivElement>(null);
+	const [dims, setDims] = useState<Dimensions | null>(null);
+
+	useEffect(() => {
+		const el = refContainer.current;
+		if (!el) return;
+
+		const update = () =>
+			setDims({ clientHeight: el.clientHeight, offsetTop: el.offsetTop });
+		update();
+
+		const observer = new ResizeObserver(update);
+		observer.observe(el);
+		return () => observer.disconnect();
+	}, []);
 
 	const numOfPages = 3;
 	let progress = 0;
 
-	const { current: pageCalc } = refContainer;
-	if (pageCalc) {
-		const { clientHeight, offsetTop } = pageCalc;
-		const screenH = window.innerHeight;
+	if (dims && dims.clientHeight > 0) {
+		const screenH = typeof window !== 'undefined' ? window.innerHeight : 0;
 		const halfH = screenH / 2;
 		const percentY =
 			Math.min(
-				clientHeight + halfH,
-				Math.max(-screenH, scrollY - offsetTop) + halfH
-			) / clientHeight;
+				dims.clientHeight + halfH,
+				Math.max(-screenH, scrollY - dims.offsetTop) + halfH
+			) / dims.clientHeight;
 		progress = Math.min(
 			numOfPages - 0.5,
 			Math.max(0.5, percentY * numOfPages)

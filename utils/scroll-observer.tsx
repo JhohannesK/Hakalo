@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface ScrollValue {
 	scrollY: number;
@@ -11,16 +11,15 @@ export const ScrollContext = React.createContext<ScrollValue>({
 const ScrollObserver = ({ children }: React.PropsWithChildren) => {
 	const [scrollY, setScrollY] = useState(0);
 
-	// Get the value of the scroll
-	const handleScroll = useCallback(() => {
-		setScrollY(window.scrollY);
-	}, []);
-
 	useEffect(() => {
+		const handleScroll = () => {
+			setScrollY(window.scrollY);
+		};
+
 		document.addEventListener('scroll', handleScroll, { passive: true });
 
 		return () => document.removeEventListener('scroll', handleScroll);
-	}, [handleScroll]);
+	}, []);
 
 	return (
 		<ScrollContext.Provider value={{ scrollY }}>
