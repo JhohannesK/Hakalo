@@ -56,7 +56,7 @@ const Tile: React.FC<WrapperProps> = ({ numOfPages }) => {
 							<h4 className='mt-5 text-xl md:text-2xl font-semibold tracking-tight text-ink'>
 								{item.title}
 							</h4>
-							<p className='mt-3 text-sm md:text-base leading-relaxed text-muted'>
+							<p className='mt-3 text-base md:text-lg leading-relaxed text-muted'>
 								{item.description}
 							</p>
 						</article>
