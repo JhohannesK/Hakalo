@@ -1,4 +1,4 @@
-import React, { useRef, useContext, useState, useCallback } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import Image from 'next/image';
 import { BsArrowBarDown } from 'react-icons/bs';
 import { ScrollContext } from '../../utils/scroll-observer';
@@ -15,16 +15,12 @@ const Masthead: React.FC = () => {
 		progress = Math.min(1, scrollY / pageCalc.clientHeight);
 	}
 
-	const animateArrowIcon = useCallback(() => {
-		setLoadImage(true);
-	}, []);
-
 	return (
 		<div
 			ref={refContainer}
-			className='min-h-screen flex flex-col items-center justify-center'
+			className='relative min-h-screen flex flex-col items-center justify-center overflow-hidden'
 			style={{
-				transform: `translateY(-${progress * 20}vh)`,
+				transform: `translate3d(0, -${progress * 14}vh, 0)`,
 			}}
 		>
 			<video
@@ -32,40 +28,69 @@ const Masthead: React.FC = () => {
 				loop
 				muted
 				playsInline
-				className='absolute w-full h-full object-cover '
+				className='absolute inset-0 w-full h-full object-cover scale-105 saturate-[0.75] contrast-125 brightness-[0.55]'
 			>
 				<source src='/vid.mp4' type='video/mp4' />
 			</video>
+
+			<div className='absolute inset-0 bg-gradient-to-b from-[#05070dcc] via-[#0b1022b8] to-[#090b10]' />
+			<div className='floating-orb h-44 w-44 bg-[#8ba9ff3d] top-[14%] left-[8%]' />
 			<div
-				className={`flex-grow-0 pt-10 transition-opacity duration-1000 ${
-					loadImage ? 'opacity-100' : 'opacity-0'
-				}`}
-			>
-				<Image
-					src='/logo.svg'
-					className='bg-transparent'
-					height={214 / 3}
-					width={228 / 3}
-					alt='logo'
-					onLoad={() => animateArrowIcon()}
-				/>
-			</div>
-			<div className='p-12 font-bold z-10 text-lime-400 drop-shadow-[0_5px_3px_rgba(0,0,0,0.4)] text-center flex-1 flex items-center justify-center flex-col '>
-				<h1 className='mb-6 text-4xl xl:text-7xl text-purple'>Hakalo</h1>
-				<h2 className='mb-2 text-2xl xl:text-3xl tracking-tight text-orange '>
-					<span>Universe of Devs </span>
-					<span>| Best in the world</span>
-				</h2>
-			</div>
-			<div
-				className={`z-10 text-white transition-all duration-1000 ${
-					loadImage ? 'opacity-100' : 'opacity-0 -translate-y-10'
-				}`}
-			>
-				<BsArrowBarDown
-					size={40}
-					className={`animate-bounce text-orange`}
-				/>
+				className='floating-orb h-36 w-36 bg-[#89f6ff2e] top-[22%] right-[12%]'
+				style={{ animationDelay: '2s' }}
+			/>
+
+			<div className='relative z-10 w-full max-w-6xl px-8 py-14 md:py-20 flex flex-col items-center text-center'>
+				<div
+					className={`transition-all duration-700 ${
+						loadImage
+							? 'opacity-100 translate-y-0'
+							: 'opacity-0 translate-y-6'
+					}`}
+				>
+					<Image
+						src='/logo.svg'
+						className='bg-transparent drop-shadow-[0_6px_14px_rgba(8,12,28,0.6)]'
+						height={214 / 3}
+						width={228 / 3}
+						alt='logo'
+						onLoad={() => setLoadImage(true)}
+					/>
+				</div>
+
+				<div
+					className={`glass-panel mt-8 md:mt-10 rounded-3xl px-6 md:px-12 py-8 md:py-12 max-w-3xl transition-all duration-700 ${
+						loadImage
+							? 'opacity-100 translate-y-0'
+							: 'opacity-0 translate-y-10'
+					}`}
+				>
+					<h1 className='text-4xl md:text-6xl xl:text-7xl font-semibold tracking-tight text-ink'>
+						Hakalo
+					</h1>
+					<h2 className='mt-4 text-base md:text-xl xl:text-2xl font-medium tracking-tight text-accentSoft'>
+						<span>Universe of Devs</span>
+						<span className='mx-2 text-muted'>|</span>
+						<span className='text-ink'>Best in the world</span>
+					</h2>
+					<p className='mt-5 text-sm md:text-base text-muted leading-relaxed'>
+						Product engineering with clean systems, sharp execution, and
+						design that feels effortless.
+					</p>
+				</div>
+
+				<div
+					className={`mt-10 md:mt-12 z-10 text-accentSoft transition-all duration-700 ${
+						loadImage
+							? 'opacity-100 translate-y-0'
+							: 'opacity-0 -translate-y-8'
+					}`}
+				>
+					<BsArrowBarDown
+						size={36}
+						className='animate-bounce drop-shadow-[0_0_18px_rgba(139,169,255,0.45)]'
+					/>
+				</div>
 			</div>
 		</div>
 	);

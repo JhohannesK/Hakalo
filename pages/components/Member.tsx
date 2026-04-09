@@ -1,6 +1,5 @@
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 
 interface Props {
 	id: string;
@@ -11,16 +10,30 @@ interface Props {
 
 const Member: React.FC<Props> = ({ id, name, socialId, link }) => {
 	return (
-		<div>
-			<Image src='/ImageOne.svg' alt={name} width={1366} height={1555} />
-			<div className='text-2xl xl:text-3xl'>{name}</div>
-			<div className='text-xl'>
-				{/* <Link href={link}>
-					<a href='' target='_blank'>
+		<div
+			id={id}
+			className='glass-panel group rounded-2xl p-4 md:p-5 h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_34px_rgba(2,5,20,0.55)]'
+		>
+			<div className='overflow-hidden rounded-xl bg-surfaceSoft/80'>
+				<Image
+					src='/ImageOne.svg'
+					alt={name}
+					width={1366}
+					height={1555}
+					className='w-full h-auto transition-transform duration-500 group-hover:scale-105'
+				/>
+			</div>
+			<div className='mt-4 text-lg md:text-xl font-semibold leading-tight text-ink'>
+				{name}
+			</div>
+			<div className='text-sm md:text-base text-muted mt-2'>
+				{link !== '#' ? (
+					<a href={link} target='_blank' rel='noreferrer' className='hover:text-accent transition-colors'>
 						{socialId}
 					</a>
-				</Link> */}
-				<p>{socialId}</p>
+				) : (
+					<p>{socialId}</p>
+				)}
 			</div>
 		</div>
 	);
